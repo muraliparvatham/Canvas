@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1</title>
+</head>
+<body>
+<h1 style="text-align: center;">Bubble App</h1>
+<canvas id="myCanvas" width="1500" height="500"></canvas>
+
+<script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+
+    //Circle
+    ctx.beginPath();
+    ctx.arc(400, 230, 40, 0, 2*Math.PI);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+    ctx.lineWidth = 200;
+
+
+    //Arrow
+    ctx.translate(0, 175);
+    ctx.beginPath();
+    ctx.moveTo(1100, 50);
+    ctx.lineTo(1000, 50);
+    ctx.lineWidth = 5;
+    ctx.stroke();
+
+    //Arrowhead
+    ctx.beginPath();
+    ctx.moveTo(980, 50);
+    ctx.lineTo(1000, 65);
+    ctx.lineTo(1000, 35);
+    ctx.closePath();
+    ctx.fillStyle = "black";
+    ctx.fill();
+</script>
+
+</body>
+</html>
+

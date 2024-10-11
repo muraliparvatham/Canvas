@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Canvas Example</title>
+        <style>
+            #hitButton{
+                margin-left: 1000px;
+                padding: 10px 10px 10px 10px;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                background-color: blue;
+
+            }
+            #resetButton{
+                float: right;
+                margin-right: 400px;
+                padding: 10px 10px 10px 10px;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                background-color: green;
+
+            }
+        </style>
+    </head>
+    <body>
+
+        <canvas id="myCanvas" width="1500" height="100"></canvas>
+        <button id="hitButton">Hit</button>
+        <button id="resetButton">Reset</button>
+
+        <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var arrow = 1000; 
+        var Speed = 5; 
+        var Color = "blue"; 
+        // Draw the circle
+        function Circle() {
+            ctx.beginPath();
+            ctx.arc(50, 50, 40, 0, 2*Math.PI);
+            ctx.fillStyle = Color;
+            ctx.fill();
+            ctx.lineWidth = 200;
+        }
+
+        // Draw arrow
+        function drawArrow() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+            Circle(); // Draw circle after clearing
+
+            ctx.beginPath();
+            ctx.moveTo(arrow + 20, 50);
+            ctx.lineTo(arrow + 180, 50);
+            ctx.lineWidth = 5;
+            ctx.stroke();
+
+            //Draw arrowhead
+            ctx.beginPath();
+            ctx.moveTo(arrow, 50);
+            ctx.lineTo(arrow + 30, 40);
+            ctx.lineTo(arrow + 30, 60);
+            ctx.closePath();
+            ctx.fillStyle = "black";
+            ctx.fill();
+            }
+
+            // Move the arrow to the circle
+            function moveArrow() {
+            arrow -= Speed;
+            drawArrow();
+
+            // Check if the arrow hit circle
+            if (arrow <= 90) {
+                clearInterval(interval);
+            Color = "green"; // Change circle color
+                Circle();
+            }
+            }
+
+            // Reset
+            function reset() {
+            arrow = 1000;
+            Color = "blue";
+            drawArrow();
+            }
+
+            // working of hit and reset buttons
+            document.getElementById("hitButton").addEventListener("click", function() {
+            interval = setInterval(moveArrow, 10);
+            });
+
+            document.getElementById("resetButton").addEventListener("click", reset);
+
+            drawArrow(); //Starting arrow position
+        </script>
+    </body>
+</html>
